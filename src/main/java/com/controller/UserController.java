@@ -24,26 +24,26 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String addUser(Model model) {
+    public String getNewUser(Model model) {
         model.addAttribute("user", new User());
         return "save";
     }
 
     @PostMapping("/user")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String saveNewUser(@ModelAttribute("user") User user) {
         userDaoImp.saveUser(user);
         return "redirect: /user";
     }
 
 
     @GetMapping("/user/edit/{id}")
-    public String updateUser(@PathVariable("id") Long userId, Model model) {
+    public String editUser(@PathVariable("id") Long userId, Model model) {
         model.addAttribute("user", userDaoImp.showUser(userId));
         return "edit";
     }
 
     @PatchMapping("/user/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+    public String updateUserDB(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         userDaoImp.updateUser(id, user);
         return "redirect: /user";
     }
